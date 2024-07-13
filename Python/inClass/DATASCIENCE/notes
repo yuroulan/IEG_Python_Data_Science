@@ -1,0 +1,38 @@
+Data Collection
+Data Preparation
+Exploratory Data Analysis (EDA)
+    - Statistics
+        - 1) Descriptive - mean, median, mod, etc...
+            - Normal distributed curve - Bell Curve
+                - middle line (average) - mean - add all / total num of item
+                                        - median - sort small to big - middle num
+                                        - mode - how many times, most num that appear
+
+        - Skew  + - mode, med, mean - good
+                - - mean med mode - obtain less than avg (standard deviation, varians - help to define how far from the avg)
+
+        - Standard Deviation, o
+
+        - collect data -->> find avg -->> 
+
+
+        - bimodel (2 peaks)
+        - multimodel(multiple peaks)
+
+        - 2) Inferential -->> study of hypothesis
+            - hypothesis testing
+            - Null hypothesis - A null hypothesis is a type of statistical hypothesis that proposes that no statistical significance exists in a set of given observations
+            - Alternate hypothesis - alternative hypothesis claims that there is an effect
+            A null hypothesis claims that there is no effect in the population, while an alternative hypothesis claims that there is an effect.
+
+            - True positive -  ada sickness, test ada sickness
+            - True Negative - no sickness, test still no sickness
+            - falls positive - system kata 
+            - falls negative - ada sickness, test kata no sickness -->> need to tune module so last one not produce
+
+
+People also ask
+
+Pandas
+- population
+- Sample

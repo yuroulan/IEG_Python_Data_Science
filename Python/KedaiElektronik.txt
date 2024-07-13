@@ -1,0 +1,5 @@
+Product | Quantity | Price
+Radio |40| 145.5
+Lamp|43|12.0
+Television |43| 1445.5
+

@@ -1,0 +1,57 @@
+Exploratory Data Analytics/Analysis (EDA)
+
+Data -> Structure data -> Data preparation -> averaging (statistically)         ->
+                                           -> relationship (mathematically)     - exploration data
+                       -> Feature Engineering -> creating new columns           ->
+
+Data is - raw (unstructured)
+        - structured - has rows and columns (csv, )
+
+if raw, convert into structured data
+ - pull out content
+    - split, extract and etc
+    - good at regular expression
+
+for structured usually got from 
+    - DB, RDBMS, NOSQL
+    - from machine CSV/Excel (atm, sensors)
+
+* Do data preparation
+    - if missing, need to do investigation on why the data missing
+    - identifying null values and replace them using avg /relationship
+    - dropna
+    - isnull
+    - fillna
+    - interpolate
+
+* Exploration data
+
+* Feature Engineering ('Columns')
+    - adding/dropping extra columns
+    - date=day, month, year/categorical (male/female)
+
+* graph
+
+Q3 - Q1 = 30 //IQR
+encoding, decoding
+
+after do data collection, data preparation/cleaning -> prediction
+    - may want to predict something
+
+Train, Testing
+
+train must be higher than testing
+
+train - 70%, test - 30%
+
+train -> ML algorithm (y = mx + c) -> model (y = 3x + 5)
+testing  will be compared by the training data (compare predicted with y with test data) - passing x
+
+if 100 % will be overfitting
+
+co-varian, co relation
+
+
+MYSQL has 2 software:
+mysqld - server
+mysql - software (command line utility)
