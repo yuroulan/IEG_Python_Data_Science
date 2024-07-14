@@ -1,40 +1,38 @@
 import pandas as pd
 
-# Step 1: Create the `x` and `y` columns
-x = list(range(1, 11))
-y = [32, 33.8, 35.6, 37.4, 39.2, 41, 42.8, 44.6, 46.4, 48.2]
+# Define the values of x and y
+x = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+y = pd.Series([32, 33.8, 35.6, 37.4, 39.2, 41, 42.8, 44.6, 46.4, 48.2])
 
-# Step 2: Calculate the mean of `x` and `y`
-mean_x = sum(x) / len(x)
-mean_y = sum(y) / len(y)
+# Calculate the means of x and y
+mean_x = x.mean()
+mean_y = y.mean()
 
-# Step 3: Compute the required columns
-x_minus_mean_x = [xi - mean_x for xi in x]
-y_minus_mean_y = [yi - mean_y for yi in y]
-x_minus_mean_x_squared = [(xi - mean_x) ** 2 for xi in x]
-y_minus_mean_y_squared = [(yi - mean_y) ** 2 for yi in y]
-xy_minus_mean_product = [(xi - mean_x) * (yi - mean_y) for xi, yi in zip(x, y)]
+# Calculate the intermediate columns
+x_minus_mean_x = x - mean_x
+y_minus_mean_y = y - mean_y
+x_minus_mean_x_sq = x_minus_mean_x ** 2
+y_minus_mean_y_sq = y_minus_mean_y ** 2
+x_minus_mean_x_y_minus_mean_y = x_minus_mean_x * y_minus_mean_y
 
-# Step 4: Calculate the slope m
-sum_xy_product = sum(xy_minus_mean_product)
-sum_x_squared = sum(x_minus_mean_x_squared)
-m = sum_xy_product / sum_x_squared
-
-# Step 5: Calculate the y-intercept c
+# Calculate slope (m) and intercept (c) for the linear regression line
+m = sum(x_minus_mean_x_y_minus_mean_y) / sum(x_minus_mean_x_sq)
 c = mean_y - m * mean_x
 
-# Step 6: Combine everything into a table and add the slope m and y-intercept c as constant columns
-data = {
+# Create the DataFrame
+df = pd.DataFrame({
     'x': x,
     'y': y,
-    'x-mean(x)': x_minus_mean_x,
-    'y-mean(y)': y_minus_mean_y,
-    '(x-mean(x))**2': x_minus_mean_x_squared,
-    '(y-mean(y))**2': y_minus_mean_y_squared,
-    '(x-mean(x))(y-mean(y))': xy_minus_mean_product,
-    'm': [m] * len(x),
-    'c': [c] * len(x)
-}
+    'x - mean(x)': x_minus_mean_x,
+    'y - mean(y)': y_minus_mean_y,
+    '(x - mean(x))^2': x_minus_mean_x_sq,
+    '(y - mean(y))^2': y_minus_mean_y_sq,
+    '(x - mean(x))(y - mean(y))': x_minus_mean_x_y_minus_mean_y,
+})
 
-df = pd.DataFrame(data)
+# Add the calculated m and c values to the DataFrame
+df['m'] = m
+df['c'] = c
+
+# Print the DataFrame
 print(df)
