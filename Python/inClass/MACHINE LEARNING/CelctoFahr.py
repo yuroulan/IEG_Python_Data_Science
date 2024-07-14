@@ -36,3 +36,5 @@ df['c'] = c
 
 # Print the DataFrame
 print(df)
+
+df.to_excel('CeltoFahr.xlsx', index=False)
