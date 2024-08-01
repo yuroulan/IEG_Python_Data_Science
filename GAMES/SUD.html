@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Puzzle</title>
+    <style>
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 2px;
+            max-width: 360px;
+            margin: auto;
+            border: 2px solid black;
+        }
+        .sudoku-cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sudoku-board">
+        <!-- Create the Sudoku grid cells -->
+        <!-- Populating a few initial values for demonstration -->
+        <div class="sudoku-cell">5</div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell">3</div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell"></div>
+        <div class="sudoku-cell"></div>
+        <!-- Repeat for the remaining cells -->
+        ${Array(72).fill('<div class="sudoku-cell"></div>').join('')}
+    </div>
+
+    <script>
+        // Your Sudoku-solving code goes here
+        // Example: Adding event listeners to handle user input
+        document.querySelectorAll('.sudoku-cell').forEach(cell => {
+            cell.addEventListener('click', function() {
+                let value = prompt("Enter a number (1-9):");
+                if (value >= 1 && value <= 9) {
+                    this.textContent = value;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
