@@ -27,8 +27,8 @@ Exploratory Data Analysis (EDA)
 
             - True positive -  ada sickness, test ada sickness
             - True Negative - no sickness, test still no sickness
-            - false positive - kata takde sickness, test kata ada 
-            - false negative - ada sickness, test kata no sickness -->> need to tune module so last one not produce
+            - falls positive - system kata 
+            - falls negative - ada sickness, test kata no sickness -->> need to tune module so last one not produce
 
 
 People also ask

@@ -68,4 +68,3 @@ print("\nState Details\n")
 for state in state_list:
     print(state)
 
-
