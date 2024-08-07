@@ -1,7 +1,5 @@
 CUSTOMER REPORT
 ====================================================================================================
-TOTAL CUSTOMERS: 1
-MINORS (<18 YEARS): 0
-ADULTS (>=18 YEARS): 1
-TOTAL CUSTOMERS WITH MEDICAL CONDITION: 0
+TOTAL CUSTOMERS: 4
+TOTAL CUSTOMERS WITH MEDICAL CONDITION: 2
 ====================================================================================================

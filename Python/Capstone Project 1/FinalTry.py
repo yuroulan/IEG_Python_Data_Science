@@ -1,4 +1,5 @@
 import datetime
+from tabulate import tabulate
 from os.path import exists
 
 class CustomerManagementSystem:
@@ -251,14 +252,14 @@ class CustomerManagementSystem:
 
             if method_choice == 1:
                 payment_method = "Credit / Debit Card"
-                details = self.keyboardInput(str, "\n\nEnter Card Details (with '-'): ", "Card Details must be a string")
+                details = self.keyboardInput(str, "\n\nEnter Credit/Debit Card Details (with '-'): ", "Card Details must be a string")
                 payment_method = payment_method.replace("-", "")
             elif method_choice == 2:
                 payment_method = "Digital Wallet"
-                details = self.keyboardInput(str, "\n\nEnter Wallet Details: ", "Wallet Details must be a string")
+                details = self.keyboardInput(str, "\n\nEnter Digital Wallet Details: ", "Wallet Details must be a string")
             elif method_choice == 3:
                 payment_method = "Bank Transfer"
-                details = self.keyboardInput(str, "\n\nEnter Bank Details (with '-'): ", "Bank Details must be a string")
+                details = self.keyboardInput(str, "\n\nEnter Bank Transfer Details (with '-'): ", "Bank Details must be a string")
             elif method_choice == 4:
                 payment_method = "\n\nCash Payment"
                 details = self.keyboardInput(str, "\n\nEnter Cash Payment Details: ", "Cash Payment Details must be a string")
@@ -338,7 +339,7 @@ class CustomerManagementSystem:
 
                     if 0 <= days_until_birthday <= 30:
                         print(f"\n-->> Next Birthday: {next_birthday} (in {days_until_birthday} days)")
-                        print("\n-->> You are eligible for a birthday discount!")
+                        print(f"\n-->> {details[0]}" + " " + f"{details [1]} are eligible for a birthday discount!")
                     else:
                         print(f"\n-->> No upcoming birthday within the next 30 days.")
                 except ValueError:
@@ -348,6 +349,36 @@ class CustomerManagementSystem:
 
         except Exception as e:
             print("\n<< Something went wrong when we try to generate the report! -->> ", e)
+
+    def displayCustomerDetails(self):
+        try:
+            with open(self.details_filename, 'rt') as details_file:
+                
+                details_lines = details_file.readlines()[1:]
+
+                table_data = []
+                headers = ["IC NO.", "FULL NAME"]
+
+                found = False
+
+                for line in details_lines:
+                    details = line.strip().split('|')
+                    if details[2]:
+
+                        table_data.append([
+                            details[2],
+                            details[0] + " " + details[1],
+                        ])
+                        found = True
+                        break
+
+                if found:
+                    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+                else:
+                    print("No details found for IC NO.:" )
+
+        except Exception as e:
+            print("\n<< Something went wrong when we try to display the customer details! -->> ", e)
 
     # Print customer report
     def printCustomerReport(self):
@@ -359,34 +390,11 @@ class CustomerManagementSystem:
             count_customers = len(customers)
             count_medical_condition = sum(1 for customer in customers if customer[7])
 
-            now = datetime.datetime.now()
-            current_year = now.year
-            minors = []
-            adults = []
-
-            for customer in customers:
-                ic_number = customer[2]
-                birth_year = int(ic_number[:2])
-                if birth_year > current_year % 100:
-                    birth_year += 1900
-                else:
-                    birth_year += 2000
-                age = current_year - birth_year
-                if age < 18:
-                    minors.append(customer)
-                else:
-                    adults.append(customer)
-
-            count_minors = len(minors)
-            count_adults = len(adults)
-
             print("                               ")
             print('=' * 100)
             print("CUSTOMER REPORT")
             print('=' * 100)
             print(f"TOTAL CUSTOMERS: {count_customers}")
-            print(f"MINORS (<18 YEARS): {count_minors}")
-            print(f"ADULTS (>=18 YEARS): {count_adults}")
             print(f"TOTAL CUSTOMERS WITH MEDICAL CONDITION: {count_medical_condition}")
             print('=' * 100)
 
@@ -395,8 +403,6 @@ class CustomerManagementSystem:
                 report_file.write("CUSTOMER REPORT\n")
                 report_file.write('=' * 100 + '\n')
                 report_file.write(f"TOTAL CUSTOMERS: {count_customers}\n")
-                report_file.write(f"MINORS (<18 YEARS): {count_minors}\n")
-                report_file.write(f"ADULTS (>=18 YEARS): {count_adults}\n")
                 report_file.write(f"TOTAL CUSTOMERS WITH MEDICAL CONDITION: {count_medical_condition}\n")
                 report_file.write('=' * 100 + '\n')
 
@@ -410,15 +416,16 @@ class CustomerManagementSystem:
         choice = None
         while choice != 'E':
             print("\n\n~ Welcome to Car Rental Customer Management System ~")
-            print(" _______________________________")
-            print("|                               |")
-            print("| 1 - Customer Registration     |")
-            print("| 2 - Update Customer Details   |")
-            print("| 3 - Generate Report           |")
-            print("| 4 - Customer Report           |")
-            print("|                               |")
-            print("| E - Exit                      |")
-            print("|_______________________________|")
+            print(" ________________________________________")
+            print("|                                        |")
+            print("| 1 - Customer Registration              |")
+            print("| 2 - Update Customer Details            |")
+            print("| 3 - Generate Report                    |")
+            print("| 4 - Display All Registered Customer    |")
+            print("| 5 - Customer Report                    |")
+            print("|                                        |")
+            print("| E - Exit                               |")
+            print("|________________________________________|")
 
             choice = self.keyboardInput(str, "\nYour Choice: ", "Your choice must only be 1, 2, 3, or E").upper()
 
@@ -429,6 +436,8 @@ class CustomerManagementSystem:
             elif choice == '3':
                 self.generateReport()
             elif choice == '4':
+                self.displayCustomerDetails()
+            elif choice == '5':
                 self.printCustomerReport()
             elif choice == 'E':
                 print(">> Exiting the system...")
