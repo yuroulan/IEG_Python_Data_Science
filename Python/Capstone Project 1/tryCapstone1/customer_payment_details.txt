@@ -1,0 +1,2 @@
+IC NO.|PAYMENT METHOD|DETAILS
+991018105338|Cash Payment|Meet and pay to driver
